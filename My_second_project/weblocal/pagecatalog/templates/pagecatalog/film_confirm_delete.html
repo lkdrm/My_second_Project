@@ -1,0 +1,12 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block about %}
+    <h1> Delete film</h1>
+
+    <p>Are you sure want to delete film: {{ film }}?</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Yes, delete." class="btn">
+    </form>
+{% endblock about %}

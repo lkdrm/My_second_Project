@@ -1,0 +1,17 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block about %}
+    <h1>All watched films</h1>
+
+  {% if filmorder_list %}
+    <ul>
+    {% for filmorder in filmorder_list %}
+      <li>
+        <a href="{% url 'film-detail' filmorder.film.pk %}">{{filmorder.film.title}}</a> ({{ filmorder.was_watched }})
+      </li>
+    {% endfor %}
+    </ul>
+    {% else %}
+      <p>There are no watched films.</p>
+  {% endif %}
+{% endblock about %}

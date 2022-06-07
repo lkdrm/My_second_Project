@@ -1,0 +1,23 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block title %} Home page {% endblock title %}
+
+{% block about %}
+<div>
+<h2 id="story">Welcome to the my Film catalog, writed by <em>LkDrm</em></h2>
+<p>This library have the following record counts:</p>
+    <ul>
+        <li><strong>Films: </strong>{{ num_films }}</li>
+        <li><strong>Actors: </strong>{{ num_actors }}</li>
+        <li><strong>Genres: </strong>{{ num_of_genres }}</li>
+        <li><strong>Language: </strong>{{ num_languages }}</li>
+        <li><strong>Producer: </strong>{{ num_of_producer }}</li>
+    </ul>
+
+<p>You have visited this page <strong>{{ num_visits }}</strong> time{{ num_visits|pluralize }}</p>
+</div>
+<div>
+    
+</div>
+{% endblock about %}
+

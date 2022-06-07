@@ -1,0 +1,25 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block title %} A page of all actors {% endblock title %}
+
+{% block about %}
+<h2 id="story">Here you can see all our actors</h2>
+
+{% if actor_list %}
+    <ul>
+        <li><a href="{% url 'actor-create'%}">Add an actor.</a></li>
+        {% for actor in actor_list %}
+        <li>
+            <a href="{{ actor.get_absolute_url }}"> {{ actor }} </a>({{ actor.date_of_birth }})
+                : ({% if actor.date_of_death is None %}
+                - 
+                {% else %}
+                    {{ actor.date_of_death }}
+                {% endif %})
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>There are no authors</p>
+{% endif %}
+{% endblock about %}

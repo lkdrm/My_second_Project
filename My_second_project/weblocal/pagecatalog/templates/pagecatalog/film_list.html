@@ -1,0 +1,21 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block title %} A page of all films{% endblock title %}
+
+{% block about %}
+<h2 id="story">Here you can see all our films</h2>
+
+{% if film_list %}
+    <ul>
+        <li><a href="{% url 'film-create'%}">Add new film.</a></li>
+        {% for film in film_list %}
+        <li>
+            <a href="{{ film.get_absolute_url }}"> {{ film.title }} </a>({{ film.actor }})
+        </li>
+        {% endfor %}        
+    </ul>
+{% else %}
+    <p>There are no books here.</p>
+{% endif %}
+
+{% endblock about %}

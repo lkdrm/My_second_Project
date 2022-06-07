@@ -1,0 +1,31 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block title %} This page about description of actor {% endblock title %}
+
+{% block about %}
+<div>
+    <h2 id="story"> Name: {{ actor.first_name }}</h2>
+    <p><strong>Films:</strong></p>
+    {% for film in actor.film_set.all %}
+    <p><a href="{{ film.get_absolute_url }}">{{ film.title }}</a></p>
+    {% endfor %}
+    <p><strong>First name: </strong>{{ actor.first_name }}</p>
+    <p><strong>Last name: </strong>{{ actor.last_name }}</p>
+    <p><strong>Date of birth: </strong>{{ actor.date_of_birth }}</p>
+    <p><strong>Date of death: </strong>{% if actor.date_of_death is None %} - {% else %}{{ actor.date_of_death}}{% endif %}</p>
+    <p><strong>Here you can read some information about actor: </strong>{{ actor.some_information }}</p>
+</div>
+<div>
+{% if actor.first_name == "Ben"%}        
+    <img src="/static/icons/Ben_Burt.png" alt="Ben" class = "main__img--sizze-actors">
+{% elif actor.first_name == "Mark Richard" %}
+    <img src="/static/icons/mark-richard.png" alt="Mark Richard" class = "main__img--sizze-actors">
+{% elif actor.first_name == "Keanu"%}
+    <img src="/static/icons/Keanu-Reeves.png" alt="Keanu-Reeves" class = "main__img--sizze-actors">
+{% elif actor.first_name == "Mark"%}
+    <img src="/static/icons/mark.png" alt="Mark" class = "main__img--sizze-actors">
+{% elif actor.first_name == "Elijah"%}
+    <img src="/static/icons/Elijah.png" alt="Elijah" class = "main__img--sizze-actors">
+{% endif %}
+</div>
+{% endblock about %}

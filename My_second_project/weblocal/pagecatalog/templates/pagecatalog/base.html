@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/my_styles.css' %}">
+    <title> {% block title %} This is the base page {% endblock title %}</title>
+</head>
+<body>
+{% block header %}
+    <header class="header__grid">
+        <div>
+            <h2>Film-catalog</h2>
+        </div>
+        <div>
+            <a href="{% url 'index'%}">
+                <p>Home page</p>
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'films'%}">
+                <p>All Films</p>
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'actors'%}">
+                <p>All Actors</p>
+            </a>
+        </div>
+        <div>    
+            {% if user.is_authenticated %}
+                <p>User: {{ user.get_username }}</p>
+                <p><a href="{% url "my-watched"%}">My watched films</a></p>
+                <p><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></p>
+            {% else %}
+                <p><a href="{% url 'login'%}?next={{request.path}}">Login</a></p>
+            {% endif %}
+        </div>
+        </div>
+        </div>
+        <div class="header__end--photos">
+            <div>
+                <a href="https://twitter.com"> <img src="/static/icons/twitter-128.png" alt="twitter"></a>
+            </div>
+            <div>
+                <a href="https://www.facebook.com"><img src="/static/icons/facebook-128.png" alt="facebook"></a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com"><img src="/static/icons/instagram-2-128.png" alt="instagram"></a>
+            </div>
+            <div>
+                <a href="https://www.youtube.com"><img src="/static/icons/youtube-128.png" alt="youtube"></a>
+            </div>
+            <div>
+                <a href="https://mail.google.com/"><img src="/static/icons/gmail-128.png" alt="gmail"></a>
+            </div>
+        </div>
+    </header>
+{% endblock header %}
+    <div class = "grid__wrap">
+        <main class = "main__grid">
+            <div class = "main__div__left--center">
+                {% block about %} {% endblock about %}
+            </div>
+        </main>
+    </div>
+    {% block pagination %}
+                    {% if is_paginated %}
+                    <div>{% comment %} class = "pagination" {% endcomment %}
+                        <span> {% comment %} class="page-links" {% endcomment %}
+                            {% if page_obj.has_previous %}
+                                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}"> previous </a>
+                            {% endif %}
+                            <span class ="page-current"> 
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                            {% if page_obj.has_next %}
+                            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                            {% endif %}
+                        </span>        
+                    </div>
+                        {% endif %}
+    {% endblock pagination %}
+    {% block footer %}
+    <footer class="footer__end">
+        <div class="footer__end--photos">
+            <div>
+                <a href="https://twitter.com"> <img src="/static/icons/twitter-128.png" alt="twitter"></a>
+            </div>
+            <div>
+                <a href="https://www.facebook.com"><img src="/static/icons/facebook-128.png" alt="facebook"></a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com"><img src="/static/icons/instagram-2-128.png" alt="instagram"></a>
+            </div>
+            <div>
+                <a href="https://www.youtube.com"><img src="/static/icons/youtube-128.png" alt="youtube"></a>
+            </div>
+            <div>
+                <a href="https://mail.google.com/"><img src="/static/icons/gmail-128.png" alt="gmail"></a>
+            </div>
+        </div>
+        <div class="untld">
+            <p>UNTITLED 2022</p>
+        </div>
+    </footer>
+    {% endblock footer %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends 'pagecatalog/base.html' %}
+
+{% block title %} This page about description of film {% endblock title %}
+
+{% block about %}
+<div>
+    <h2 id="story">Name of film: {{ film.title }}</h2>
+    <p><strong>Actor: </strong><a href="{{ film.actor.get_absolute_url }}">{{ film.actor }}</a></p>
+    <p><strong>Genre: </strong>{{ film.genre.all|join:", " }}</p>
+    <p><strong>Language: </strong>{{ film.language.all|join:", " }}</p>
+    <p><strong>Producer: </strong>{{ film.producer.all|join:" " }}</p>
+    <p><strong>Description:</strong>{{ film.description }}</p>
+</div>
+<div>
+{% if film.title == "WALL-E"%}        
+    <img src="/static/icons/wall-e.png" alt="wall-e" class = "main__img--sizze">
+{% elif film.title == "Star Wars" %}
+    <img src="/static/icons/star wars.png" alt="star-wars" class = "main__img--sizze">
+{% elif film.title == "The Lord of Rings"%}
+    <img src="/static/icons/the-lord-of-rings.png" alt="the-lord-of-rings" class = "main__img--sizze">
+{% elif film.title == "Matrix"%}
+    <img src="/static/icons/matrix.png" alt="matrix" class = "main__img--sizze">
+{% elif film.title == "Ted"%}
+    <img src="/static/icons/ted.png" alt="ted" class = "main__img--sizze">
+{% endif %}
+</div>
+<h4>Avaibles: </h4>
+    {% for film in film.filmorder_set.all %}
+    <hr>
+    <p>{{ film.get_status_display }}</p>
+    {% if film.status != "a" %}
+        <p><strong>Still make</strong>{{ was_watched }}</p>
+    {% endif %}
+        <p><strong>Imprint: </strong>{{ film.imprint }}</p>
+        <p><strong>Id: </strong>{{ film.id }}</p>
+    {% endfor %}
+
+
+{% endblock about %}
+{% comment %} <h4>Avaibles: </h4>
+    {% for film in film.filmorder_set.all %}
+    <hr>
+    <p>{{ film.get_status_display }}</p>
+    {% if film.status != "a" %}
+        <p><strong>Still make</strong>{{ was_watched }}</p>
+    {% endif %}
+        <p><strong>Imprint: </strong>{{ film.imprint }}</p>
+        <p><strong>Id: </strong>{{ film.id }}</p>
+    {% endfor %} {% endcomment %}
